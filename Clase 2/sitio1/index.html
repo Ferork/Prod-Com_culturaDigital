@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Landscape Website - Sidebar Menu</title>
+  <style>
+    body {
+      display: flex;
+      margin: 0;
+      font-family: Arial, sans-serif;
+      color: #333;
+    }
+    /* Sidebar styles */
+    .sidebar {
+      width: 250px;
+      background-color: #2c3e50;
+      color: #ecf0f1;
+      padding: 20px;
+      height: 100vh;
+    }
+    .sidebar ul {
+      list-style: none;
+      padding: 0;
+    }
+    .sidebar ul li {
+      margin: 15px 0;
+    }
+    .sidebar ul li a {
+      color: #ecf0f1;
+      text-decoration: none;
+    }
+    /* Main content */
+    .content {
+      padding: 20px;
+      flex-grow: 1;
+    }
+    h1 {
+      font-size: 2em;
+      color: #34495e;
+    }
+  </style>
+</head>
+<body>
+  <div class="sidebar">
+    <h2>Menu</h2>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#about">About</a></li>
+      <li><a href="#services">Services</a></li>
+      <li><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+  <div class="content">
+    <h1>Welcome to Our Landscape Site</h1>
+    <p>Here is the content section where you can display landscape images, services, and more.</p>
+  </div>
+</body>
+</html>
