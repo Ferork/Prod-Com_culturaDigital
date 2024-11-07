@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Array Manipulation</title>
+</head>
+<body>
+    <h1>Array Manipulation in JavaScript</h1>
+    <script>
+        // 1. Crea un array de nombres y muestra el tercer nombre en la consola.
+        let nombres = ["Carlos", "Ana", "Pedro", "Marta", "Luis"];
+        console.log("El tercer nombre es:", nombres[2]);
+
+        // 2. Añade un nombre al inicio y otro al final del array de nombres.
+        nombres.unshift("Sofía");
+        nombres.push("Gabriel");
+        console.log("Array después de añadir al inicio y al final:", nombres);
+
+        // 3. Crea un array de números e imprime solo los números impares.
+        let numeros = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+        let impares = numeros.filter(num => num % 2 !== 0);
+        console.log("Números impares:", impares);
+
+        // 4. Combina dos arrays de frutas y elimina las frutas duplicadas.
+        let frutas1 = ["manzana", "pera", "uva"];
+        let frutas2 = ["uva", "plátano", "manzana", "fresa"];
+        let frutasCombinadas = [...new Set([...frutas1, ...frutas2])];
+        console.log("Frutas sin duplicados:", frutasCombinadas);
+
+        // 5. Ordena un array de números de mayor a menor.
+        let numerosDesordenados = [10, 3, 5, 2, 8, 1, 4];
+        let numerosOrdenados = numerosDesordenados.sort((a, b) => b - a);
+        console.log("Array ordenado de mayor a menor:", numerosOrdenados);
+
+        // 6. Usa map para duplicar los valores en un array de números.
+        let numerosDuplicados = numeros.map(num => num * 2);
+        console.log("Array con valores duplicados:", numerosDuplicados);
+
+        // 7. Crea un array de edades y usa filter para encontrar las mayores de 18.
+        let edades = [12, 25, 17, 30, 15, 22, 19];
+        let mayoresDe18 = edades.filter(edad => edad > 18);
+        console.log("Edades mayores de 18:", mayoresDe18);
+
+        // 8. Usa reduce para encontrar el total de puntos en un array de puntajes.
+        let puntajes = [10, 20, 15, 5, 30];
+        let totalPuntos = puntajes.reduce((total, puntos) => total + puntos, 0);
+        console.log("Total de puntos:", totalPuntos);
+
+        // 9. Remueve el primer y último elemento de un array de colores.
+        let colores = ["rojo", "verde", "azul", "amarillo", "morado"];
+        colores.shift(); // Remueve el primer elemento
+        colores.pop(); // Remueve el último elemento
+        console.log("Array de colores después de remover el primero y el último:", colores);
+
+        // 10. Verifica si el array de números contiene el número 10.
+        let contieneDiez = numeros.includes(10);
+        console.log("¿El array de números contiene el número 10?", contieneDiez);
+    </script>
+</body>
+</html>
