@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mapa Estado de México</title>
+  <!-- Leaflet CSS -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <style>
+    body {
+      margin: 0;
+      padding: 0;
+      display: flex;
+      justify-content: center; /* Centrar horizontalmente */
+      align-items: center;    /* Centrar verticalmente */
+      height: 100vh;          /* Altura de toda la ventana */
+      background-color: #f0f0f0; /* Fondo para hacer contraste */
+    }
+    #map {
+      width: 40%;  /* Ancho del mapa */
+      height: 60%; /* Altura del mapa */
+      border: 2px solid #333; /* Borde para resaltar el recuadro */
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
+    }
+  </style>
+</head>
+<body>
+  <div id="map"></div>
+
+  <!-- Leaflet JS -->
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script>
+    // Coordenadas de la UAM Lerma
+    const uamLermaCoords = [19.291395, -99.502075];
+
+    // Inicializar el mapa centrado en el Estado de México
+    const map = L.map('map').setView([19.35, -99.6], 10); // Coordenadas y nivel de zoom
+
+    // Agregar un tile layer de OpenStreetMap
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      maxZoom: 19,
+      attribution: '© OpenStreetMap contributors'
+    }).addTo(map);
+
+    // Agregar un marcador en la UAM Lerma
+    const marker = L.marker(uamLermaCoords).addTo(map);
+    marker.bindPopup('<b>UAM Lerma</b><br>Estado de México.').openPopup();
+  </script>
+</body>
+</html>
