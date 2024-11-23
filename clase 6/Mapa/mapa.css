@@ -1,0 +1,23 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: #f0f0f0; /* Fondo general */
+    font-family: Arial, sans-serif;
+  }
+  
+  .map-container {
+    display: flex;
+    justify-content: center; /* Centrar horizontalmente */
+    align-items: center;    /* Centrar verticalmente */
+    height: 100vh;          /* Altura de toda la ventana */
+  }
+  
+  #map {
+    width: 80%;  /* Ancho del mapa */
+    height: 60%; /* Altura del mapa */
+    border: 2px solid #333; /* Borde para resaltar el recuadro */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Sombra para dar profundidad */
+  }
+
+
+  
