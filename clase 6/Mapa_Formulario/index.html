@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario y Mapa</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+        h1 {
+            text-align: center;
+        }
+        form {
+            margin-bottom: 20px;
+        }
+        form input {
+            padding: 10px;
+            margin: 5px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        form button {
+            padding: 10px 20px;
+            border: none;
+            background-color: #007bff;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        form button:hover {
+            background-color: #0056b3;
+        }
+        table {
+            border-collapse: collapse;
+            width: 80%;
+            margin-top: 20px;
+        }
+        table, th, td {
+            border: 1px solid #ddd;
+            text-align: center;
+        }
+        th, td {
+            padding: 10px;
+        }
+        #map {
+            margin-top: 30px;
+            width: 80%;
+            height: 400px;
+            border: 1px solid #ccc;
+        }
+    </style>
+</head>
+<body>
+    <h1>Formulario y Mapa</h1>
+    <form id="userForm">
+        <input type="text" id="firstName" placeholder="Nombre" required>
+        <input type="text" id="lastName" placeholder="Apellido" required>
+        <button type="submit">Agregar</button>
+    </form>
+    <table id="userTable">
+        <thead>
+            <tr>
+                <th>Nombre</th>
+                <th>Apellido</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- Aquí se agregarán filas dinámicamente -->
+        </tbody>
+    </table>
+    <div id="map"></div>
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Diccionario para almacenar usuarios
+        const users = [];
+
+        // Referencia al formulario
+        const form = document.getElementById('userForm');
+        const tableBody = document.querySelector('#userTable tbody');
+
+        // Manejar el formulario
+        form.addEventListener('submit', function (event) {
+            event.preventDefault();
+            
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            
+            if (firstName && lastName) {
+                // Agregar el usuario al diccionario
+                users.push({ firstName, lastName });
+
+                // Ordenar el diccionario alfabéticamente por apellido
+                users.sort((a, b) => a.lastName.localeCompare(b.lastName));
+
+                // Renderizar la tabla
+                renderTable();
+                
+                // Limpiar el formulario
+                form.reset();
+            }
+        });
+
+        // Renderizar la tabla
+        function renderTable() {
+            tableBody.innerHTML = '';
+            users.forEach(user => {
+                const row = document.createElement('tr');
+                row.innerHTML = `<td>${user.firstName}</td><td>${user.lastName}</td>`;
+                tableBody.appendChild(row);
+            });
+        }
+
+        // Configuración del mapa
+        const map = L.map('map').setView([19.291389, -99.502083], 13);
+
+        // Agregar tiles al mapa
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+        }).addTo(map);
+
+        // Agregar marcador en la UAM Lerma
+        L.marker([19.291389, -99.502083])
+            .addTo(map)
+            .bindPopup('UAM Lerma')
+            .openPopup();
+    </script>
+</body>
+</html>
