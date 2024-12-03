@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+   
+    <meta charset="UTF-8"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+    <title>Formulario y Mapa Interactivo</title>
+ 
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+       
+        body {
+            font-family: Arial, sans-serif; 
+            display: flex;
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center; 
+            min-height: 100vh; 
+            margin: 0; 
+            background-color: #f4f4f4; 
+        }
+
+        h1 {
+            text-align: center; 
+        }
+
+        
+        form {
+            margin-bottom: 20px; 
+            text-align: center; 
+        }
+
+        
+        form input, form textarea {
+            padding: 10px; 
+            margin: 5px; 
+            border: 1px solid #ccc; 
+            border-radius: 5px; /* Bordes redondeados */
+        }
+
+        
+        form button {
+            padding: 10px 20px; 
+            border: none; 
+            background-color: #007bff; 
+            color: white; 
+            border-radius: 5px; 
+            cursor: pointer; /* Cambia a puntero para indicar clickeabilidad */
+        }
+
+        /* Efecto al pasar el mouse sobre el botón */
+        form button:hover {
+            background-color: #0056b3; /* Azul más oscuro */
+        }
+
+        
+        #map {
+            margin-top: 30px; 
+            width: 80%; 
+            height: 500px; 
+            border: 1px solid #ccc; 
+        }
+    </style>
+</head>
+<body>
+    <h1>Formulario y Mapa Interactivo</h1>
+    <!-- Formulario para ingresar datos del usuario -->
+    <form id="userForm">
+        <input type="text" id="firstName" placeholder="Nombre" required> 
+        <input type="text" id="lastName" placeholder="Apellido" required> 
+        <textarea id="description" placeholder="Descripción del marcador" required></textarea> 
+        <button type="submit">Agregar</button> <!-- Botón para enviar los datos -->
+    </form>
+    
+    <div id="map"></div>
+    
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        // Referencia al formulario en el HTML
+        const form = document.getElementById('userForm');
+        // Referencia al campo de descripción
+        const descriptionField = document.getElementById('description');
+        // Variable para almacenar temporalmente la descripción ingresada
+        let currentDescription = '';
+
+        // Escuchamos el evento "submit" del formulario
+        form.addEventListener('submit', function (event) {
+            event.preventDefault(); // Evita que el formulario recargue la página al enviar
+
+            // Capturamos los valores ingresados por el usuario
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            currentDescription = descriptionField.value.trim(); // Guardamos la descripción ingresada
+
+            // Verificamos que los campos de nombre, apellido y descripción no estén vacíos
+            if (firstName && lastName) {
+                form.reset(); // Limpiamos los campos del formulario después de enviar
+            }
+        });
+
+        
+        const map = L.map('map').setView([19.291389, -99.502083], 13); // Coordenadas de inicio y nivel de zoom
+
+        
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19, 
+        }).addTo(map);
+
+        // Escuchamos el evento "click" en el mapa
+        map.on('click', function (event) {
+            // Solo agregamos un marcador si hay una descripción ingresada
+            if (currentDescription) {
+                // Agregamos un marcador en las coordenadas donde se hizo clic
+                L.marker(event.latlng)
+                    .addTo(map) // Lo añadimos al mapa
+                    .bindPopup(`<strong>${currentDescription}</strong>`) // Mostramos la descripción como popup
+                    .openPopup(); // Abrimos el popup automáticamente
+                currentDescription = ''; // Limpiamos la variable para evitar duplicados
+            } else {
+                // Mostramos un mensaje si el usuario no ingresó una descripción
+                alert('Por favor, agrega una descripción en el formulario antes de hacer clic en el mapa.');
+            }
+        });
+    </script>
+</body>
+</html>
+
